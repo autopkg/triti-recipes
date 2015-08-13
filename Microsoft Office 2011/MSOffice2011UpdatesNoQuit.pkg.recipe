@@ -3,9 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Finds the latest Office 2011 update, downloads the disk image, extracts the 
-pkg, and disables the component that quits any running apps. Uses a modified 
-MSOffice2011UpdateInfoProvider that returns the actually downloaded version number.</string>
+	<string>Finds the latest Office 2011 update, downloads the disk image, extracts the pkg, 
+and disables the component that quits any running apps using a modified preinstall script.</string>
 	<key>Identifier</key>
 	<string>com.github.triti.pkg.Office2011UpdatesNoQuit</string>
 	<key>Input</key>
@@ -19,42 +18,10 @@ MSOffice2011UpdateInfoProvider that returns the actually downloaded version numb
 	</dict>
 	<key>MinimumVersion</key>
 	<string>0.2.0</string>
+	<key>ParentRecipe</key>
+	<string>com.github.autopkg.download.Office2011Updates</string>
 	<key>Process</key>
 	<array>
-		<dict>
-			<key>Processor</key>
-			<string>MSOffice2011UpdateInfoProvider</string>
-			<key>Arguments</key>
-			<dict>
-				<key>culture_code</key>
-				<string>%CULTURE_CODE%</string>
-				<key>version</key>
-				<string>%VERSION%</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>URLDownloader</string>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>EndOfCheckPhase</string>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>CodeSignatureVerifier</string>
-			<key>Arguments</key>
-			<dict>
-				<key>input_path</key>
-				<string>%pathname%/Office*.*pkg</string>
-				<key>expected_authority_names</key>
-				<array>
-					<string>Developer ID Installer: Microsoft Corporation (UBF8T346G9)</string>
-					<string>Developer ID Certification Authority</string>
-					<string>Apple Root CA</string>
-				</array>
-			</dict>
-		</dict>
 		<dict>
 			<key>Processor</key>
 			<string>FlatPkgUnpacker</string>
