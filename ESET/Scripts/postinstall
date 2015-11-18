@@ -1,0 +1,5 @@
+#!/bin/bash
+
+readonly LOCAL_PKG=EraAgent6.pkg
+
+/usr/sbin/installer -pkg "/private/tmp/$LOCAL_PKG" -target /

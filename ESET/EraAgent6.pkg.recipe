@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Downloads the ESET Remote Administrator Agent.
+
+Override this recipe and replace the Input values below with values for your
+ERA installation.
+
+eraa_server_hostname: Hostname of your ESET Remote Administrator server.
+eraa_server_port: TCP port for your ERA server.
+eraa_peer_cert_b64: Base64 encoded peer certificate for your agemts. Obtain 
+    from Admin->Certificates->Peer Certificates->click on Agent certificate
+    ->Export as Base64.
+eraa_ca_cert_b64: Base64 encoded CA public key. Obtain from Admin->Certificates
+    Certification Authorities->click on ERA Certification authority
+    ->Export Public Key as Base64.
+
+Optional Input variables
+eraa_peer_cert_pwd: Password for the peer certiticate.
+</string>
+	<key>Identifier</key>
+	<string>com.github.triti.pkg.EraAgent6</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>EraAgent</string>
+		<key>ERAA_INSTALLER_URL</key>
+		<string>http://download.eset.com/download/ra/v6/standalone-installers/agent/Agent-MacOSX-i386.dmg</string>
+		<key>eraa_server_hostname</key>
+		<string>eraserver</string>
+		<key>eraa_server_port</key>
+		<string>2222</string>
+		<key>eraa_peer_cert_b64</key>
+		<string>WW91ciBCYXNlNjQgZW5jb2RlZCBwZWVyIGNlcnRpZmljYXRlIGdvZXMgaGVyZS4K</string>
+		<key>eraa_ca_cert_b64</key>
+		<string>WW91ciBCYXNlNjQgZW5jb2RlZCBDQSBwdWJsaWMga2V5IGdvZXMgaGVyZS4gTm93IGdldCBiYWNrIHRvIHdvcmsuCg==</string>
+	</dict>
+	<key>MinimumVersion</key>
+	<string>0.4.0</string>
+	<key>ParentRecipe</key>
+	<string>com.github.triti.download.EraAgent6</string>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Processor</key>
+			<string>FlatPkgUnpacker</string>
+			<key>Arguments</key>
+			<dict>
+				<key>skip_payload</key>
+				<true/>
+				<key>flat_pkg_path</key>
+				<string>%pathname%/Agent-MacOSX-i386-*.pkg</string>
+				<key>destination_path</key>
+				<string>%RECIPE_CACHE_DIR%/unpack</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>com.github.triti.SharedProcessors/XMLReader</string>
+			<key>Arguments</key>
+			<dict>
+				<key>xml_path</key>
+				<string>%destination_path%/com.eset.remoteadministrator.agent.pkg/PackageInfo</string>
+				<key>elements</key>
+				<array>
+					<dict>
+						<key>xpath</key>
+						<string>.</string>
+						<key>attributes</key>
+						<dict>
+							<key>identifier</key>
+							<string>bundleid</string>
+						</dict>
+					</dict>
+					<dict>
+						<key>xpath</key>
+						<string>./bundle</string>
+						<key>attributes</key>
+						<dict>
+							<key>CFBundleShortVersionString</key>
+							<string>version</string>
+						</dict>
+					</dict>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>PkgRootCreator</string>
+			<key>Arguments</key>
+			<dict>
+				<key>pkgroot</key>
+				<string>%RECIPE_CACHE_DIR%/%NAME%</string>
+				<key>pkgdirs</key>
+				<dict>
+					<key>private</key>
+					<string>0755</string>
+					<key>private/tmp</key>
+					<string>0755</string>
+				</dict>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>Copier</string>
+			<key>Arguments</key>
+			<dict>
+				<key>source_path</key>
+				<string>%pathname%/Agent-MacOSX-i386-*.pkg</string>
+				<key>destination_path</key>
+				<string>%pkgroot%/private/tmp/EraAgent6.pkg</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>EraAgentPostflightPlistCreator</string>
+			<key>Arguments</key>
+			<dict>
+				<key>output_plist_path</key>
+				<string>%pkgroot%/private/tmp/postflight.plist</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>PkgCreator</string>
+			<key>Arguments</key>
+			<dict>
+				<key>pkg_request</key>
+				<dict>
+					<key>pkgname</key>
+					<string>%NAME%-%version%</string>
+					<key>id</key>
+					<string>%bundleid%</string>
+					<key>chown</key>
+					<array>
+						<dict>
+							<key>path</key>
+							<string>private</string>
+							<key>user</key>
+							<string>root</string>
+							<key>group</key>
+							<string>wheel</string>
+						</dict>
+					</array>
+					<key>scripts</key>
+					<string>Scripts</string>
+				</dict>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
