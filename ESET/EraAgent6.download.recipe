@@ -11,7 +11,7 @@
 		<key>NAME</key>
 		<string>EraAgent</string>
 		<key>ERAA_INSTALLER_URL</key>
-		<string>http://download.eset.com/download/ra/v6/standalone-installers/agent/Agent-MacOSX-i386.dmg</string>
+		<string>https://download.eset.com/download/ra/v6/standalone-installers/agent/Agent-MacOSX-i386.dmg</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>0.2.0</string>
