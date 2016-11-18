@@ -104,12 +104,12 @@ eraa_peer_cert_pwd: Password for the peer certiticate.
 		</dict>
 		<dict>
 			<key>Processor</key>
-			<string>Copier</string>
+			<string>PkgCopier</string>
 			<key>Arguments</key>
 			<dict>
-				<key>source_path</key>
+				<key>source_pkg</key>
 				<string>%pathname%/Agent-MacOSX-i386-*.pkg</string>
-				<key>destination_path</key>
+				<key>pkg_path</key>
 				<string>%pkgroot%/private/tmp/EraAgent6.pkg</string>
 			</dict>
 		</dict>
