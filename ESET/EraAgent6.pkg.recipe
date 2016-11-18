@@ -11,11 +11,11 @@ ERA installation.
 eraa_server_hostname: Hostname of your ESET Remote Administrator server.
 eraa_server_port: TCP port for your ERA server.
 eraa_peer_cert_b64: Base64 encoded peer certificate for your agemts. Obtain 
-    from Admin->Certificates->Peer Certificates->click on Agent certificate
-    ->Export as Base64.
-eraa_ca_cert_b64: Base64 encoded CA public key. Obtain from Admin->Certificates
-    Certification Authorities->click on ERA Certification authority
-    ->Export Public Key as Base64.
+    from Admin--Certificates--Peer Certificates--click on Agent certificate
+    --Export as Base64.
+eraa_ca_cert_b64: Base64 encoded CA public key. Obtain from Admin--Certificates
+    Certification Authorities--click on ERA Certification authority
+    --Export Public Key as Base64.
 
 Optional Input variables
 eraa_peer_cert_pwd: Password for the peer certiticate.
@@ -27,7 +27,7 @@ eraa_peer_cert_pwd: Password for the peer certiticate.
 		<key>NAME</key>
 		<string>EraAgent</string>
 		<key>ERAA_INSTALLER_URL</key>
-		<string>http://download.eset.com/download/ra/v6/standalone-installers/agent/Agent-MacOSX-i386.dmg</string>
+		<string>https://download.eset.com/download/ra/v6/standalone-installers/agent/Agent-MacOSX-i386.dmg</string>
 		<key>eraa_server_hostname</key>
 		<string>eraserver</string>
 		<key>eraa_server_port</key>
