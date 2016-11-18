@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>Description</key>
-    <string>Downloads latest version of Google Chrome, builds a package, and copies it to 
+    <string>Downloads latest version of MS Office 2011, builds a package, and copies it to 
 the DeployStudio packages repository.
 Input keys:
 - DS_PKGS_PATH is the path for the Packages folder in the DeployStudio 
@@ -41,15 +41,13 @@ Input keys:
         </dict>
         <dict>
             <key>Processor</key>
-            <string>Copier</string>
+            <string>PkgCopier</string>
             <key>Arguments</key>
             <dict>
-                <key>source_path</key>
+                <key>source_pkg</key>
                 <string>%destination_pkg%</string>
-                <key>destination_path</key>
+                <key>pkg_path</key>
                 <string>%DS_PKGS_PATH%/%DS_NAME%-%version%.pkg</string>
-                <key>overwrite</key>
-                <true/>
             </dict>
         </dict>
     </array>
