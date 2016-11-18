@@ -41,15 +41,13 @@ Input keys:
         </dict>
         <dict>
             <key>Processor</key>
-            <string>Copier</string>
+            <string>PkgCopier</string>
             <key>Arguments</key>
             <dict>
-                <key>source_path</key>
+                <key>source_pkg</key>
                 <string>%pathname%/*.pkg</string>
-                <key>destination_path</key>
+                <key>pkg_path</key>
                 <string>%DS_PKGS_PATH%/%DS_NAME%.pkg</string>
-                <key>overwrite</key>
-                <true/>
             </dict>
         </dict>
     </array>
