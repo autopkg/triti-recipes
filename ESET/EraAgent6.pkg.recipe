@@ -26,8 +26,6 @@ eraa_peer_cert_pwd: Password for the peer certiticate.
 	<dict>
 		<key>NAME</key>
 		<string>EraAgent</string>
-		<key>ERAA_INSTALLER_URL</key>
-		<string>http://download.eset.com/download/ra/v6/standalone-installers/agent/Agent-MacOSX-i386.dmg</string>
 		<key>eraa_server_hostname</key>
 		<string>eraserver</string>
 		<key>eraa_server_port</key>
