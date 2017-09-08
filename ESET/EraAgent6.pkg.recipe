@@ -36,6 +36,8 @@ eraa_peer_cert_pwd: Password for the peer certiticate.
 		<string>WW91ciBCYXNlNjQgZW5jb2RlZCBwZWVyIGNlcnRpZmljYXRlIGdvZXMgaGVyZS4K</string>
 		<key>eraa_ca_cert_b64</key>
 		<string>WW91ciBCYXNlNjQgZW5jb2RlZCBDQSBwdWJsaWMga2V5IGdvZXMgaGVyZS4gTm93IGdldCBiYWNrIHRvIHdvcmsuCg==</string>
+		<key>eraa_initial_sg_token</key>
+		<string>MzZiMjZmMTctN2JlYi00MjBlLWEwMjMtOTg4MmY1YjA3ODczeWVhaCwgdXNlIHlvdXIgb3duIGluaXRpYWwgc3RhdGljIGdyb3VwIHRva2VuCg==</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>0.4.0</string>

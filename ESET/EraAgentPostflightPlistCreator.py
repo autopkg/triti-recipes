@@ -13,18 +13,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""See docstring for EraAgentPostflightPlistCreator class"""
+"""See docstring for EraAgentPostflightPlistCreator class."""
 
 from autopkglib import Processor, ProcessorError
 import FoundationPlist
 
 
-__all__ = ["PlistEditor"]
+__all__ = ["EraAgentPostflightPlistCreator"]
 
 
 class EraAgentPostflightPlistCreator(Processor):
-    """Creates a postflight plist file for the ESET Remote Administrator Agent
-    package."""
+    """Create postflight plist for the ESET Remote Administrator Agent package."""
     description = __doc__
     input_variables = {
         "input_plist_path": {
@@ -69,6 +68,11 @@ class EraAgentPostflightPlistCreator(Processor):
             "description":
                 "Product UUID.",
         },
+        "eraa_initial_sg_token": {
+            "required": False,
+            "description":
+                "Initial static group token.",
+        },
     }
     output_variables = {
     }
@@ -76,22 +80,22 @@ class EraAgentPostflightPlistCreator(Processor):
     __doc__ = description
 
     def read_plist(self, pathname):
-        """reads a plist from pathname"""
-        #pylint: disable=no-self-use
+        """Read a plist from pathname."""
+        # pylint: disable=no-self-use
         if not pathname:
             return {}
         try:
             return FoundationPlist.readPlist(pathname)
-        except Exception, err:
+        except Exception as err:
             raise ProcessorError(
                 'Could not read %s: %s' % (pathname, err))
 
     def write_plist(self, data, pathname):
-        """writes a plist to pathname"""
-        #pylint: disable=no-self-use
+        """Write a plist to pathname."""
+        # pylint: disable=no-self-use
         try:
             FoundationPlist.writePlist(data, pathname)
-        except Exception, err:
+        except Exception as err:
             raise ProcessorError(
                 'Could not write %s: %s' % (pathname, err))
 
@@ -115,9 +119,13 @@ class EraAgentPostflightPlistCreator(Processor):
         if "eraa_product_uuid" in self.env:
             working_plist["ProductGuid"] = self.env["eraa_product_uuid"]
 
+        if "eraa_initial_sg_token" in self.env:
+            working_plist["InitialStaticGroup"] = self.env["eraa_initial_sg_token"]
+
         # write changed plist
         self.write_plist(working_plist, self.env["output_plist_path"])
         self.output("Updated plist at %s" % self.env["output_plist_path"])
+
 
 if __name__ == '__main__':
     PROCESSOR = EraAgentPostflightPlistCreator()
