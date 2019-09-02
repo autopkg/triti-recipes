@@ -16,9 +16,9 @@
 """See docstring for EraAgentPostflightPlistCreator class."""
 
 from __future__ import absolute_import
-from autopkglib import Processor, ProcessorError
-import FoundationPlist
 
+import FoundationPlist
+from autopkglib import Processor, ProcessorError
 
 __all__ = ["EraAgentPostflightPlistCreator"]
 
