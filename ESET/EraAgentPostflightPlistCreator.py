@@ -87,7 +87,7 @@ class EraAgentPostflightPlistCreator(Processor):
             return {}
         try:
             return FoundationPlist.readPlist(pathname)
-        except Exception as err:
+        except BaseException as err:
             raise ProcessorError(
                 'Could not read %s: %s' % (pathname, err))
 
@@ -96,7 +96,7 @@ class EraAgentPostflightPlistCreator(Processor):
         # pylint: disable=no-self-use
         try:
             FoundationPlist.writePlist(data, pathname)
-        except Exception as err:
+        except BaseException as err:
             raise ProcessorError(
                 'Could not write %s: %s' % (pathname, err))
 
