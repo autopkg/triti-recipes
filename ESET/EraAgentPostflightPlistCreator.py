@@ -15,9 +15,10 @@
 # limitations under the License.
 """See docstring for EraAgentPostflightPlistCreator class."""
 
-from autopkglib import Processor, ProcessorError
-import FoundationPlist
+from __future__ import absolute_import
 
+import FoundationPlist
+from autopkglib import Processor, ProcessorError
 
 __all__ = ["EraAgentPostflightPlistCreator"]
 
