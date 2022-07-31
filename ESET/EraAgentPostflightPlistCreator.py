@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/local/autopkg/python
 #
 # Copyright 2015 Tyler Riti
 #
@@ -25,58 +25,53 @@ __all__ = ["EraAgentPostflightPlistCreator"]
 
 class EraAgentPostflightPlistCreator(Processor):
     """Create postflight plist for the ESET Remote Administrator Agent package."""
+
     description = __doc__
     input_variables = {
         "input_plist_path": {
             "required": False,
-            "description":
-                ("File path to a plist; empty or undefined to start with "
-                 "an empty plist."),
+            "description": (
+                "File path to a plist; empty or undefined to start with "
+                "an empty plist."
+            ),
         },
         "output_plist_path": {
             "required": True,
-            "description":
-                "File path to a plist. Can be the same path as input_plist.",
+            "description": "File path to a plist. Can be the same path as input_plist.",
         },
         "eraa_server_hostname": {
             "required": True,
-            "description":
-                "Hostname of the ESET Remote Administrator server.",
+            "description": "Hostname of the ESET Remote Administrator server.",
         },
         "eraa_server_port": {
             "required": True,
-            "description":
-                "The ESET Remote Administrator server port.",
+            "description": "The ESET Remote Administrator server port.",
         },
         "eraa_peer_cert_pwd": {
             "required": False,
-            "description":
-                ("Client certificate password; empty or undefined if cert is "
-                 "unencrypted."),
+            "description": (
+                "Client certificate password; empty or undefined if cert is "
+                "unencrypted."
+            ),
         },
         "eraa_peer_cert_b64": {
             "required": True,
-            "description":
-                "Base64 encoded client certificate.",
+            "description": "Base64 encoded client certificate.",
         },
         "eraa_ca_cert_b64": {
             "required": False,
-            "description":
-                "Base64 encoded CA certificate.",
+            "description": "Base64 encoded CA certificate.",
         },
         "eraa_product_uuid": {
             "required": False,
-            "description":
-                "Product UUID.",
+            "description": "Product UUID.",
         },
         "eraa_initial_sg_token": {
             "required": False,
-            "description":
-                "Initial static group token.",
+            "description": "Initial static group token.",
         },
     }
-    output_variables = {
-    }
+    output_variables = {}
 
     __doc__ = description
 
@@ -88,8 +83,7 @@ class EraAgentPostflightPlistCreator(Processor):
         try:
             return FoundationPlist.readPlist(pathname)
         except Exception as err:
-            raise ProcessorError(
-                'Could not read %s: %s' % (pathname, err))
+            raise ProcessorError("Could not read %s: %s" % (pathname, err))
 
     def write_plist(self, data, pathname):
         """Write a plist to pathname."""
@@ -97,8 +91,7 @@ class EraAgentPostflightPlistCreator(Processor):
         try:
             FoundationPlist.writePlist(data, pathname)
         except Exception as err:
-            raise ProcessorError(
-                'Could not write %s: %s' % (pathname, err))
+            raise ProcessorError("Could not write %s: %s" % (pathname, err))
 
     def main(self):
         # read original plist (or empty plist)
@@ -128,6 +121,6 @@ class EraAgentPostflightPlistCreator(Processor):
         self.output("Updated plist at %s" % self.env["output_plist_path"])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     PROCESSOR = EraAgentPostflightPlistCreator()
     PROCESSOR.execute_shell()
