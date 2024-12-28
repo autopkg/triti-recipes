@@ -10,20 +10,31 @@
 	<dict>
 		<key>NAME</key>
 		<string>RCDefaultApp</string>
-		<key>DOWNLOAD_URL</key>
-		<string>http://www.rubicode.com/Downloads/RCDefaultApp-2.1.X.dmg</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>0.2.0</string>
 	<key>Process</key>
 	<array>
 		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>re_pattern</key>
+				<string>(Downloads/RCDefaultApp\-[\d\.X]+\.dmg)</string>
+				<key>result_output_var_name</key>
+				<string>urlpath</string>
+				<key>url</key>
+				<string>https://www.rubicode.com/Software/RCDefaultApp/</string>
+			</dict>
+			<key>Processor</key>
+			<string>URLTextSearcher</string>
+		</dict>
+		<dict>
 			<key>Processor</key>
 			<string>URLDownloader</string>
 			<key>Arguments</key>
 			<dict>
 				<key>url</key>
-				<string>%DOWNLOAD_URL%</string>
+				<string>https://www.rubicode.com/%urlpath%</string>
 			</dict>
 		</dict>
 		<dict>
