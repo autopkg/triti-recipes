@@ -1,9 +1,9 @@
-## AutoPkg Recipes
+# triti-recipes
 
-This is a collection of my recipes for [AutoPkg](https://github.com/autopkg/autopkg)
+**This repository will soon be [archived](https://github.com/autopkg/triti-recipes/issues/12) and its contents will be removed.**
 
-## Installation
+The [commit history](https://github.com/autopkg/triti-recipes/commits/master), [issues](https://github.com/autopkg/triti-recipes/issues?q=is%3Aissue), and [pull requests](https://github.com/autopkg/triti-recipes/pulls?q=is%3Apr) are still available for reference, but no future changes are planned.
 
-    $ autopkg repo-add triti-recipes
+To remove this repository from your local AutoPkg setup, run:
 
-For more information, see [Getting Started](https://github.com/autopkg/autopkg/wiki/Getting-Started)
+    autopkg repo-delete triti-recipes
